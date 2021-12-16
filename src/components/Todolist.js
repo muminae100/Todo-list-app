@@ -55,6 +55,10 @@ const TodoList = () => {
             <div className = "task-container">
             {taskList && taskList.map((obj , index) => <Card taskObj = {obj} index = {index} deleteTask = {deleteTask} updateListArray = {updateListArray}/> )}
             </div>
+            <div style={{"width":"100%", "padding":"40px 100px", "background-color":"#F6F7F8"}}>Yesteday's tasks</div>
+            <div className = "task-container">
+            {taskList && taskList.map((obj , index) => <Card taskObj = {obj} index = {index} deleteTask = {deleteTask} updateListArray = {updateListArray}/> )}
+            </div>
             <CreateTask toggle = {toggle} modal = {modal} save = {saveTask}/>
         </>
     );
