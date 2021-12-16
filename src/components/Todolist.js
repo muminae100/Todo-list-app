@@ -14,6 +14,15 @@ const Todolist = () => {
         }
     }, [])
 
+    
+    const deleteTask = (index) => {
+        let tempList = taskList
+        tempList.splice(index, 1)
+        localStorage.setItem("taskList", JSON.stringify(tempList))
+        setTaskList(tempList)
+        window.location.reload()
+    }
+
     const toggle = () => {
         setModal(!modal);
     }
