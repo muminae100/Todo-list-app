@@ -1,39 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import CreateTask from '../modals/CreateTask';
 
 const Todolist = () => {
+    const [modal, setModal] = useState(false);
+    const [taskList, setTaskList] = useState([])
+    
+    useEffect(() => {
+        let arr = localStorage.getItem("taskList")
+       
+        if(arr){
+            let obj = JSON.parse(arr)
+            setTaskList(obj)
+        }
+    }, [])
+    
     return (
-        <>
-        <div className="header text-center bg-light">
-            <h1>Todo list</h1>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Create task
-    </button>
-
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            ...
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-        </div>
-    </div>
-    </div>
-        </div>
-        <div className="task-container">
-
-        </div>
+        <>  
+            <div className = "header text-center">
+                <h3>Todo List</h3>
+                <button className = "btn btn-primary mt-2" onClick = {() => setModal(true)} >Create Task</button>
+            </div>
+            <div className = "task-container">
+            {taskList && taskList.map((obj , index) => <Card taskObj = {obj} index = {index} deleteTask = {deleteTask} updateListArray = {updateListArray}/> )}
+            </div>
+            <CreateTask toggle = {toggle} modal = {modal} save = {saveTask}/>
         </>
     );
 };
