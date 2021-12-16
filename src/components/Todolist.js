@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import CreateTask from '../modals/CreateTask';
+import CreateTask from '../modals/CreateTask'
+import Card from './Card';
 
-const Todolist = () => {
+const TodoList = () => {
     const [modal, setModal] = useState(false);
     const [taskList, setTaskList] = useState([])
     
@@ -13,18 +14,19 @@ const Todolist = () => {
             setTaskList(obj)
         }
     }, [])
-    
-    const updateListArray = (obj, index) => {
+
+
+    const deleteTask = (index) => {
         let tempList = taskList
-        tempList[index] = obj
+        tempList.splice(index, 1)
         localStorage.setItem("taskList", JSON.stringify(tempList))
         setTaskList(tempList)
         window.location.reload()
     }
-    
-    const deleteTask = (index) => {
+
+    const updateListArray = (obj, index) => {
         let tempList = taskList
-        tempList.splice(index, 1)
+        tempList[index] = obj
         localStorage.setItem("taskList", JSON.stringify(tempList))
         setTaskList(tempList)
         window.location.reload()
@@ -42,8 +44,9 @@ const Todolist = () => {
         setModal(false)
     }
 
+
     return (
-        <>  
+        <>
             <div className = "header text-center">
                 <h3>Todo List</h3>
                 <button className = "btn btn-primary mt-2" onClick = {() => setModal(true)} >Create Task</button>
@@ -56,4 +59,4 @@ const Todolist = () => {
     );
 };
 
-export default Todolist;
+export default TodoList;
