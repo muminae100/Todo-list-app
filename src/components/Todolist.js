@@ -13,7 +13,14 @@ const Todolist = () => {
             setTaskList(obj)
         }
     }, [])
-
+    
+    const updateListArray = (obj, index) => {
+        let tempList = taskList
+        tempList[index] = obj
+        localStorage.setItem("taskList", JSON.stringify(tempList))
+        setTaskList(tempList)
+        window.location.reload()
+    }
     
     const deleteTask = (index) => {
         let tempList = taskList
